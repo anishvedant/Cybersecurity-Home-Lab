@@ -308,27 +308,37 @@ All logs are stored with timestamps, indexed by host, severity, and rule ID. Doc
 
 ## Lessons Learned
 
-This project helped me understand the complexity of cybersecurity infrastructure, the interdependence between offensive and defensive tools, and the importance of context-driven alerting and incident analysis.
+This project helped me gain a comprehensive and practical understanding of modern cybersecurity infrastructure by simulating an enterprise-grade environment within a controlled lab setup. I explored the entire lifecycle of cybersecurity—from vulnerability identification and exploitation to detection, response, and remediation—using real-world tools and methodologies. Below are the key lessons and takeaways categorized by domain:
 
-Key takeaways:
+- **Simulating Enterprise Environments**: Setting up a fully functional Active Directory with Group Policies, Organizational Units, and a domain-joined Windows client helped me understand how organizations manage access, authentication, and user roles. It also enabled me to simulate lateral movement and privilege escalation paths using BloodHound.
 
-- Simulating Enterprise-Grade Environments: Setting up a fully functional Active Directory (AD) with Group Policies, Organizational Units, and a domain-joined Windows client taught me how real corporate environments manage identity, access control, and endpoint governance. It helped me understand how attackers leverage misconfigurations and how defenders can mitigate them.
+- **Firewall Rule Design and Packet Filtering (pfSense)**: By configuring NAT, segmentation, and DHCP/DNS services using pfSense, I learned how firewall policies influence internal traffic flow, service exposure, and log forwarding to SIEMs for visibility and security enforcement.
 
-- Vulnerability Assessment in Context: By deploying Nessus and comparing its output with manual scans from Kali Linux, I learned how to prioritize vulnerabilities, understand CVSS scores, and differentiate between false positives and actionable findings. This experience sharpened my ability to triage risk in real-time.
+- **Vulnerability Assessment (Nessus + Kali Linux)**: Using Nessus to identify CVEs and misconfigurations across various targets and validating them through manual exploitation with Kali Linux taught me how to assess vulnerability severity, differentiate false positives, and develop a risk-prioritized remediation approach.
 
-- Endpoint Detection and Response (EDR): Configuring Wazuh agents across Windows, Linux, and even Docker containers exposed me to endpoint-level telemetry like process creation, file integrity, registry modifications, and system calls. I gained insight into how attackers leave traces, and how EDR solutions detect, correlate, and escalate those traces.
+- **Endpoint Detection and Response (EDR) with Wazuh**: I deployed Wazuh agents on Windows, Linux, and Docker containers to monitor logs, process activity, file integrity, kernel modules, and registry changes. I gained real-time visibility into endpoint behavior and understood how modern EDR platforms detect and classify anomalies.
 
-- Incident Detection and Response Lifecycle: Through simulated attacks using MITRE Caldera and the analysis of resulting alerts in Wazuh, I practiced real-world incident response techniques. I learned how to recognize indicators of compromise (IoCs), follow alert timelines, and respond using structured workflows (e.g., isolating hosts, escalating cases to TheHive).
+- **Incident Detection and Response Lifecycle**: I simulated attacks with MITRE Caldera and tracked them using Wazuh and TheHive. This helped me learn how alerts are generated, triaged, and correlated to create cases with actionable observables, including response workflows like isolating hosts or escalating incidents.
 
-- File Integrity Monitoring (FIM): Wazuh’s real-time monitoring of system binaries and configuration files helped me understand the importance of change detection as a critical layer of defense. I configured alerts for unauthorized changes to sensitive files and tested how tampering was reported.
+- **File Integrity Monitoring (FIM)**: With Wazuh's FIM modules, I configured rules to monitor system binaries and configuration files. I practiced detecting unauthorized file modifications and tampering attempts, highlighting the importance of baselining and integrity validation.
 
-- Log Correlation and Alert Tuning: I realized that simply forwarding logs isn't enough—log normalization, categorization, and rule tuning are essential to minimize noise. I wrote and adjusted custom Wazuh rules to reduce false positives and enrich true positives with MITRE ATT&CK mapping.
+- **Log Correlation and Alert Tuning**: I realized that raw logging is not enough. I tuned detection rules in Wazuh to enrich alerts with context (GeoIP, MITRE ATT&CK tags), filtered noise, and built meaningful alert signatures to reduce false positives and improve detection precision.
 
-- Red vs Blue Team Interplay: The combination of Kali Linux as the offensive platform and Wazuh + TheHive as the defense stack gave me a 350-degree view of cyber operations. I learned how attacks unfold and how defenders observe and react to them. Each offensive move became a learning opportunity for defensive detection.
+- **Red vs. Blue Team Dynamics**: Running ethical hacking tools from Kali Linux against vulnerable targets like Metasploitable2, DVWA, and bWAPP helped me understand attacker behavior, while simultaneously validating detection on the blue team stack (Wazuh + TheHive).
 
-- Containerized Security Testing: Running vulnerable apps like DVWA, bWAPP, and WebGoat in Docker containers allowed me to safely conduct repeatable web application security tests. It also introduced me to DevSecOps practices like container hardening, network segmentation, and image scanning.
+- **Threat Hunting & Multi-OS Monitoring**: Wazuh’s unified dashboard allowed me to hunt for threats across multiple operating systems and containers simultaneously. I analyzed logs for malware artifacts, suspicious user behavior, and policy violations—improving my threat hunting skills and situational awareness.
 
-- Case Management and Automation: Integrating TheHive and Cortex showed me how SOCs manage incidents, correlate observables, and enrich cases automatically via tools like VirusTotal and IPInfo. I gained hands-on experience in how incident triage workflows are built.
+- **Security Testing in Dockerized Apps**: Hosting vulnerable applications inside Docker (DVWA, WebGoat, bWAPP) made it easier to perform web app security testing in isolated environments, reinforcing DevSecOps concepts like container security, segmentation, and stateless threat simulation.
+
+- **Case Management & Enrichment (TheHive & Cortex)**: Integrating Wazuh with TheHive and Cortex allowed me to automate incident escalation, enrich cases with VirusTotal and IPInfo, and maintain structured records for each detected threat—closely resembling modern SOC workflows.
+
+- **Performance and Endpoint Evaluation**: I used Wazuh to monitor resource utilization and process health across various systems. This gave me operational insights into host behavior and helped identify anomalies that might indicate compromise or misconfiguration.
+
+- **Visualization & Network Awareness**: By designing a complete network topology and implementing log forwarding and SIEM dashboards, I gained clarity on how data moves across a flat subnet and how central logging contributes to visibility, audit trails, and forensic readiness.
+
+---
+
+This project solidified my ability to simulate and analyze both offensive and defensive cybersecurity operations. It has equipped me with a deeper understanding of vulnerability management, endpoint telemetry, malware detection, incident response, file integrity validation, and threat hunting—all essential for working in or building a modern SOC.
 
 <p align="center">
   <img src="media/image18.png" alt="Centralized Log Timeline from Wazuh for threat hunting">
