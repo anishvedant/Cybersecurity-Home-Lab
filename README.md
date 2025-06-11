@@ -193,13 +193,13 @@ Portainer provides a user-friendly GUI to manage containers, inspect logs, and t
 </p>
 
 <p align="center">
-  <img src="media/image11.png" alt="WebGoat Interface running in Docker">
+  <img src="media/image12.png" alt="WebGoat Interface running in Docker">
   <br>
   <strong><em>Figure 13:</em></strong> <em>WebGoat Interface running in Docker</em>
 </p>
 
 <p align="center">
-  <img src="media/image12.png" alt="bWAPP Application in a Containerized Environment">
+  <img src="media/image10.png" alt="bWAPP Application in a Containerized Environment">
   <br>
   <strong><em>Figure 14:</em></strong> <em>bWAPP Application in a Containerized Environment</em>
 </p>
